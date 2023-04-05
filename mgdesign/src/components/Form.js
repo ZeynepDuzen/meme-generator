@@ -8,7 +8,8 @@ function Form(){
   const [email,setEmail] = React.useState("");
   const [gsm,setGsm] = React.useState("");
   const [isComputer,setIsComputer] = React.useState(false);
-  const [status,setStatus] = React.useState("");
+  const [status,setStatus] = React.useState(false);
+  const [music,setMusic] = React.useState();
 
   function handleFirstName(event){
      console.log(event.target.value);
@@ -34,15 +35,22 @@ function Form(){
         console.log(event.target.checked); 
         setIsComputer(event.target.cheked);                  
   }
-
   function handleRadioButton(event){
-     console.log(event.target.checked);
-     setStatus(event.target.value);
-     console.log(status);
+      console.log(event.target.checked);
+      setStatus(event.target.value);
+      }
+  function handleSelectOption(event){
+     setMusic(event.target.value);
   }
+  function handleSubmmit(event){
+    event.preventDefault(); 
+    console.log(event);                         
+  }
+     
+  console.log(music);
 
    return(
-       <form>
+       <form onSubmit={handleSubmmit}>
            <input
             type="text"
             placeholder="First Name"
@@ -76,11 +84,42 @@ function Form(){
             type="radio"
             value="fulltime"
             name="fulltime"
-            checked={status}
+            checked={status === "fulltime"}
             onChange={handleRadioButton}
-           /> 
-                         
-       </form>                       
+           />
+           <label>Full Time</label> 
+           <input 
+            type="radio"
+            value="parttime"
+            name="parttime"
+            checked={status === "parttime"}
+            onChange={handleRadioButton}
+           />              
+           <label>Part Time</label>
+           <input 
+            type="radio"
+            value="freelance"
+            name="freelance"
+            checked={status === "freelance"}
+            onChange={handleRadioButton}
+           />
+           <label>Freelance</label>
+
+           <br/>
+           <br/>
+
+           <label>What is your favorite music?</label>
+           <select
+               value={music}
+               onChange={handleSelectOption}
+               name="music"
+           >
+               <option value="rain">Sound of Rain </option>               
+               <option value="piano">Sound of Piano </option>               
+               <option value="violin">Sound of Violin</option>               
+           </select>
+          <button>Submit</button>
+          </form>                       
    )
 }
 
