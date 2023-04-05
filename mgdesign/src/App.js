@@ -11,10 +11,11 @@ function App() {
       {/** 
       <Navbar />
       <Meme />
-      <Counter />
+      
       <Form />
+      <Signup />
       */}
-     <Signup />
+     <Counter />
     </div>
   );
 }
